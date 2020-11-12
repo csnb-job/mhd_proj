@@ -11,21 +11,58 @@
         <div class="header-search"></div>
       </a>
     </header>
+    <Swiper :autoplay="2000" :loop="true">
+      <Swiper-item>1</Swiper-item>
+      <Swiper-item>2</Swiper-item>
+      <Swiper-item>3</Swiper-item>
+    </Swiper>
   </div>
 </template>
 
 <script>
+
+import { Swiper, SwiperItem } from '@/components/Swiper'
+import { getbanner } from '@/api/banner'
+
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: {
+    Swiper,
+    SwiperItem
+  },
+  methods: {
+    changeHandler (payload) {
+      console.log('index', payload)
+    }
+  },
+  created () {
+    getbanner().then(res => {
+      console.log(res)
+    })
+  }
 }
+
 </script>
 
 <style lang='scss' scoped>
+@import "@/assets/styles/mixins.scss";
 .page-home{
   display: flex;
   flex-direction: column;
   height: 100%;
   .index-header {
+    // position: relative;
+    // &::after{
+    //   content: '';
+    //   position: absolute;
+    //   width: 100px;
+    //   height: 1px;
+    //   left: 0px;
+    //   bottom: 0px;
+    //   background: #ededed;
+    //   transform: scaleY(0.5);
+    // }
+@include border-bottom;
     display: flex;
     height: 44px;
     //三者等分平铺
